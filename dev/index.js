@@ -10,6 +10,9 @@ import router from './routes';
 const port = process.env.PORT || 3001;
 const app = express();
 
+app.set('peers', {});
+app.set('files', {});
+
 // makes it so requests from other doamins work
 app.use(cors());
 

@@ -8,14 +8,8 @@ const deletePeer = async (req, res) => {
   const peers = req.app.get('peers');
   const files = req.app.get('files');
 
-  peers[peerId] = false;
-
-  const keys = Object.keys(files);
-  keys.forEach((file) => {
-    if (files[file]) {
-      files[file] = files[file].filter(peer => peer !== peerId);
-    }
-  });
+  peers.deletePeer(peerId);
+  files.deletePeerFiles(peerId);
 
   console.log(peers);
   console.log(files);

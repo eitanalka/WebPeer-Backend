@@ -12,11 +12,7 @@ const addFile = async (req, res) => {
     return res.status(400).send('Bad peer id');
   }
 
-  if (files[file] && !files[file].find(peer => peer === peerId)) {
-    files[file].push(peerId);
-  } else {
-    files[file] = [peerId];
-  }
+  files.addFile(file, peerId);
 
   console.log(files);
   return res.status(200).send('OK');

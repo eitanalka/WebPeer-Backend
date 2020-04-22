@@ -6,7 +6,7 @@ const addPeer = async (req, res) => {
   }
 
   const peers = req.app.get('peers');
-  peers[peerId] = true;
+  peers.addPeer(peerId);
   console.log(peers);
   return res.status(200).send('OK');
 };

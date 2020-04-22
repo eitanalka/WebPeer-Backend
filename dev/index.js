@@ -4,16 +4,20 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { PeerServer } from 'peer';
+import Files from './classes/Files';
+import Peers from './classes/Peers';
 
 import router from './routes';
 
 const port = process.env.PORT || 3001;
 const app = express();
 
-app.set('peers', {});
-app.set('files', {});
+app.set('peers', new Peers());
 
-// makes it so requests from other doamins work
+
+app.set('files', new Files());
+
+// makes it so requests from other domains work
 app.use(cors());
 
 // log incoming requests

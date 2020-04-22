@@ -12,9 +12,7 @@ const deleteFile = async (req, res) => {
     return res.status(400).send('Bad peer id');
   }
 
-  if (files[file]) {
-    files[file] = files[file].filter(peer => peer !== peerId);
-  }
+  files.deleteFile(file, peerId);
 
   console.log(files);
 

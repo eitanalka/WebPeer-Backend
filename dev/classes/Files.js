@@ -16,6 +16,10 @@ export default class Files {
   deleteFile(file, peerId) {
     if (this[file]) {
       this[file].peers = this[file].peers.filter(peer => peer !== peerId);
+
+      if (this[file].peers.length === 0) {
+        delete this[file];
+      }
     }
   }
 

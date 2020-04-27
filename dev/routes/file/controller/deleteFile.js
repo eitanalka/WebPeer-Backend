@@ -13,6 +13,7 @@ const deleteFile = async (req, res) => {
   }
 
   files.deleteFile(file, peerId);
+  peers.notifyPeers();
 
   console.log(files);
 

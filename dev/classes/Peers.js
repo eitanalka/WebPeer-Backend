@@ -1,9 +1,16 @@
 export default class Peers {
-  addPeer(peerId) {
-    this[peerId] = true;
+  addPeer(peerId, socket) {
+    this[peerId] = socket;
   }
 
   deletePeer(peerId) {
-    this[peerId] = false;
+    delete this[peerId];
+  }
+
+  notifyPeers() {
+    const keys = Object.keys(this);
+    keys.forEach((peerId) => {
+      this[peerId].emit('updatefiles');
+    });
   }
 }

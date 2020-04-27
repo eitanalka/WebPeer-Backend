@@ -1,8 +1,10 @@
-const addFile = async (req, res) => {
-  const { peerId, fileName } = req.body;
+import hasha from 'hasha';
 
-  if (!peerId || !fileName) {
-    return res.status(400).send('Must include peerId and file name');
+const addFile = async (req, res) => {
+  const { peerId, fileName, file } = req.body;
+
+  if (!peerId || !fileName || !file) {
+    return res.status(400).send('Must include peerId, file name, and file data');
   }
 
   if (typeof fileName !== 'string') {
@@ -16,7 +18,12 @@ const addFile = async (req, res) => {
     return res.status(400).send('Bad peer id');
   }
 
-  files.addFile(fileName, peerId);
+  const hash = hasha(file);
+  if (files[fileName] && files[fileName].hash !== hash) {
+    return res.status(400).send('A differnt file with the same file name already exists');
+  }
+
+  files.addFile(fileName, peerId, hash);
   peers.notifyPeers();
 
   console.log(files);

@@ -27,7 +27,7 @@ app.use(cors());
 app.use(morgan('combined'));
 
 // parse json object before sending it to router
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 // all api requests are expected to start with /api
 app.use('/api', router);
